@@ -17,7 +17,7 @@ jobs:
           application_id: ${{ secrets.PAT_APP_ID }}
           application_private_key: ${{ secrets.PAT_APP_PRIVATE_KEY }}
 
-      - name: Release Drafter
-        uses: release-drafter/release-drafter@v5.18.1
-        env:
-          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ steps.get_workflow_token.outputs.token }}
