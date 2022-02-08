@@ -1,0 +1,22 @@
+name: POC PAT Generator
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  poc-pat-generator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Get Token
+        id: get_workflow_token
+        uses: peter-murray/workflow-application-token-action@v1.3.0
+        with:
+          application_id: ${{ secrets.PAT_APP_ID }}
+          application_private_key: ${{ secrets.PAT_APP_PRIVATE_KEY }}
+
+      - run: echo $GITHUB_TOKEN
+        env:
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
